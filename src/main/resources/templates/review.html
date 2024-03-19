@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+        <html lang="en" xmlns:th="https://thymeleaf.org"
+        xmlns:layout="http://www.nz.ultraq.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+
+        <head>
+        <title>My reservations</title>
+
+    <style>
+        .star {
+            color: gold;
+            font-size: 24px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        input {
+            width: 70%;
+            height: 180px; /* Adjust the height as needed */
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+
+        .rating-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 10px;
+            width: 100%; /* Set to full width */
+        }
+
+        .rating {
+            display: flex;
+            flex-direction: row-reverse; /* Reverse the order of stars */
+        }
+
+        .rating input {
+            position: absolute;
+            left: -100vw;
+        }
+
+        .rating label {
+            font-size: 24px;
+            cursor: pointer;
+            color: initial; /* Default color is now initial */
+        }
+
+        .rating input:checked ~ label,
+        .rating input:hover ~ label {
+            color: gold;
+        }
+
+        .rating input:focus-visible + label {
+            outline: 2px solid gold;
+        }
+    </style>
+
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <!-- Page Content-->
+    <section layout:fragment="body" class="py-5">
+        <div class="container">
+            <form role="form" method="post" th:action="@{/review/{reservationId}(reservationId=${reservation_id})}" th:object="${review}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="review_text">Review:</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="review_text"
+                                name="review_text"
+                                th:field="*{review_text}"
+                                placeholder="Write your review here">
+                        <p th:if="${#fields.hasErrors('review_text')}" class="text-danger" th:errors="*{review_text}"></p>
+                    </div>
+                    <div class="rating-container">
+                        <label for="rating">Star Rating System</label>
+                        <div class="rating" id="rating">
+                            <input id="rating1" type="radio" th:field="*{stars}" th:value="5">
+                            <label for="rating1">&#9733;</label>
+                            <input id="rating2" type="radio" th:field="*{stars}" th:value="4">
+                            <label for="rating2">&#9733;</label>
+                            <input id="rating3" type="radio" th:field="*{stars}" th:value="3">
+                            <label for="rating3">&#9733;</label>
+                            <input id="rating4" type="radio" th:field="*{stars}" th:value="2">
+                            <label for="rating4">&#9733;</label>
+                            <input id="rating5" type="radio" th:field="*{stars}" th:value="1">
+                            <label for="rating5">&#9733;</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>
+</title>
+</head>
+<body>
+
+</body>
+</html>

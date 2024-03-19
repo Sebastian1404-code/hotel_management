@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org"
+      xmlns:layout="http://www.nz.ultraq.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+    <title>My reservations</title>
+
+    <style>
+        .star {
+            color: gold;
+            font-size: 24px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .hotel-image {
+            max-width: 100px;
+            max-height: 100px;
+        }
+    </style>
+
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <!-- Page Content-->
+    <section layout:fragment="body" class="py-5">
+        <table>
+            <thead>
+            <tr>
+                <th>Hotel Image</th>
+                <th>Hotel Name</th>
+                <th>Location</th>
+                <th>Check-in Date</th>
+                <th>Check-out Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <div th:each="reservation :${reservations}">
+            <!-- Loop through your reservations and populate the rows -->
+            <tr>
+                <td><a th:href="@{/review/{reservationId}(reservationId=${reservation.id})}"><img class="hotel-image" th:src="${reservation.hotel.photoUrl}" alt="Hotel Image"></a></td>
+                <td th:text="${reservation.hotel.name}"></td>
+                <td th:text="${reservation.location}"></td>
+                <td th:text="${reservation.check_in}"></td>
+                <td th:text="${reservation.check_out}"></td>
+            </tr>
+            </div>
+            <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+
+        <!--<div class="container px-5 my-5">
+            <div class="row gx-5">
+                <div th:each="reservation :${reservations}" class="col-lg-6">
+                    <div class="position-relative mb-5">
+                        <a th:href="@{/hotel/{hotelId}(hotelId=${reservation.hotel.id})}"><img class="img-fluid rounded-3 mb-3" th:src="${reservation.hotel.photoUrl}" alt="error"/></a>
+                        <a th:text="${reservation.hotel.name}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" th:href="@{/hotel/{hotelId}(hotelId=${reservation.hotel.id})}"></a>
+                        <div id="starContainer">
+                            <span th:each="i : ${#numbers.sequence(1, reservation.hotel.stars)}" class="star">★</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </section>
+
+</main>
+
+</body>
+</html>

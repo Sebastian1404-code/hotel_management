@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Guest Details</title>
+</head>
+<body>
+
+<h2>Complete Guest Details</h2>
+
+<form th:action="@{/guest/save-guest-details}" method="post">
+    <!-- Add hidden fields for necessary data -->
+    <input type="hidden" th:field="*{reservationId}" />
+    <input type="hidden" th:field="*{numberOfGuests}" />
+
+    <!-- Loop through the number of guests to get their details -->
+    <div th:each="i : ${#numbers.sequence(1, numberOfGuests)}">
+        <h3 th:text="'Guest ' + ${i}"></h3>
+        <!-- Add input fields for guest details, e.g., first name, last name, personal code -->
+        <label for="firstName" th:text="'First Name ' + ${i}"></label>
+        <input type="text" id="firstName" name="guestList[${i - 1}].firstName" required />
+
+        <label for="lastName" th:text="'Last Name ' + ${i}"></label>
+        <input type="text" id="lastName" name="guestList[${i - 1}].lastName" required />
+
+        <label for="personalCode" th:text="'Personal Code ' + ${i}"></label>
+        <input type="text" id="personalCode" name="guestList[${i - 1}].personalCode" required />
+
+        <!-- Add more fields as needed -->
+    </div>
+
+    <button type="submit">Save Guest Details</button>
+</form>
+
+</body>
+</html>

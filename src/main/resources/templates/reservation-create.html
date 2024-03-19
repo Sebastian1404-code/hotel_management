@@ -1,0 +1,92 @@
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+    <title>Reservation</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <div class="container">
+            <form role="form" method="post" th:action="@{/reserve}" th:object="${reservation}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="location">Location</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="location"
+                                name="location"
+                                th:field="*{location}"
+                                placeholder="Location">
+                        <p th:if="${#fields.hasErrors('location')}" class="text-danger" th:errors="*{location}"></p>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="check_in">Check-in</label>
+                        <input
+                                type="date"
+                                class="form-control"
+                                id="check_in"
+                                name="check_in"
+                                th:field="*{check_in}">
+                        <p th:if="${#fields.hasErrors('check_in')}" class="text-danger" th:errors="*{check_in}"></p>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="check_out">Check-out</label>
+                    <input
+                            type="date"
+                            class="form-control"
+                            id="check_out"
+                            name="check_out"
+                            th:field="*{check_out}">
+                    <p th:if="${#fields.hasErrors('check_out')}" class="text-danger" th:errors="*{check_out}"></p>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="adults">Adults</label>
+                    <div>
+                        <input type="number"
+                               id="adults"
+                               min="1" max="15"
+                               th:value="1"
+                               class="form-control"
+                               name="adults"
+                               th:field="*{adults}"
+                               placeholder="1">
+                    </div>
+                    <p th:if="${#fields.hasErrors('adults')}" class="text-danger" th:errors="*{adults}"></p>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="children">Children</label>
+                    <input
+                            type="number"
+                            min="1"
+                            max="15"
+                            class="form-control"
+                            id="children"
+                            name="children"
+                            th:field="*{children}"
+                            placeholder="1">
+                    <p th:if="${#fields.hasErrors('children')}" class="text-danger" th:errors="*{children}"></p>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="rooms">Rooms</label>
+                    <input
+                            type="number"
+                            min="1"
+                            max="15"
+                            class="form-control"
+                            id="rooms"
+                            name="rooms"
+                            th:field="*{rooms}"
+                            placeholder="1">
+                    <p th:if="${#fields.hasErrors('rooms')}" class="text-danger" th:errors="*{rooms}"></p>
+                </div>
+                <button type="submit" class="btn btn-primary">Reserve</button>
+            </form>
+        </div>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org"
+      xmlns:layout="http://www.nz.ultraq.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+    <title>Hotel List</title>
+
+    <style>
+        .star {
+            color: gold;
+            font-size: 24px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .review-container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .review {
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow for better separation */
+        }
+
+
+        .star {
+            color: gold;
+            font-size: 20px;
+        }
+
+        .review-text {
+            margin-top: 10px;
+        }
+
+        .user {
+            margin-left: auto;
+        }
+    </style>
+
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <!-- Page Content-->
+    <section layout:fragment="body" class="py-5">
+        <div class="review-container">
+            <h1>Hotel Reviews</h1>
+            <br/>
+            <br/>
+            <h1 th:text="${name}"></h1>
+            <div th:each="review: ${reviews}" class="review">
+
+                <div class="review-text">
+                    <div>
+                        <span th:each="i : ${#numbers.sequence(1, review.stars)}" class="star">★</span>
+                    </div>
+                </div>
+                <div class="user" th:text="${review.reservation.userEntity.username}"></div>
+                <div class="review-text" th:text="${review.review_text}"></div>
+        </div>
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>
